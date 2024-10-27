@@ -1,0 +1,73 @@
+public class Round_Robin {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+
+        System.out.println("Enter The number of Process: ");
+        int number = in.nextInt();
+
+        int Burst_Time[] = new int[number];
+
+        for (int i = 0; i < number; i++) {
+            System.out.println("Enter The Burst Time for p" + (i + 1));
+            Burst_Time[i] = in.nextInt();
+        }
+
+        
+        System.out.println("Enter The Quantum number: ");
+        int Quantum = in.nextInt();
+
+        int Wait_Time[] = new int[number];
+        int Turnaround[] = new int[number];
+
+        int total = 0;
+
+        do
+        {
+           for(int i = 0; i < number; i++)
+           {
+              if (Burst_Time[i] > Quantum)
+              {
+                  for(int j = 0; j < number; j++)
+                  {
+                      if(j != i && Burst_Time[j] != 0)
+                      {
+                          Wait_Time[j] += Quantum;
+                      }
+                  }
+                  Burst_Time[i] -= Quantum;
+              }
+
+              else
+              {
+                  for(int j = 0; j < number; j++)
+                  {
+                      if(j != i && Burst_Time[j] != 0)
+                      {
+                          Wait_Time[j] += Burst_Time[i];
+                      }
+                  }
+                  Burst_Time[i] = 0;
+              }
+           }
+           total = 0;
+           for(int i = 0; i < number; i++)
+           {
+               total += Burst_Time[i];
+           }
+        }
+        while (total != 0); //if the burst time != 0 continue
+
+
+        System.out.println("Processes\twaiting time");
+
+        float total_wait = 0;
+        for(int i = 0; i < number; i++)
+        {
+            System.out.println("p" + (i+1)+"\t\t\t"+Wait_Time[i]);
+            total_wait += Wait_Time[i];
+
+        }
+        System.out.println("Avg waiting is: "+(total_wait/number));
+        
+    }
+}
