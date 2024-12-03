@@ -1,3 +1,4 @@
+## 💡: I built some algorithm in Operating System and I used FCFS algorithm , The round-robin(RR) and SJF Non Premp
 # 1. FCFS algorithm 💻:
   * the process that requests the CPU first is allocated the CPU first.
 ## Advantage: 
